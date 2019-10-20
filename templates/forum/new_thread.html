@@ -1,0 +1,40 @@
+{% extends "forum/base.html" %}
+{% block content %}
+{% load bbcode_tags %}
+<h1>Nouveau fil</h1>
+
+<div class="container-fluid col-md-8 w_bg">
+
+    <form id="new_thread_form" action="/forum/newthread/{{ category.uid }}" method="post">
+        {% csrf_token %}
+        {{ new_thread_form.as_p }}
+        <input id= "message_submit" class="btn btn-outline-success" type="submit" value="Créer fil" />
+    </form>
+
+    <br>
+
+    <p>Vous pouvez laisser votre pointeur sur les boutons bbcode pour en savoir plus.</p>
+    <div>
+        <button class="btn btn-outline-secondary" title="Texte en gras" onclick="document.forms['reply_form']['id_content'].value += '[b][/b]'">b</button>
+        <button class="btn btn-outline-secondary" title="Texte en italique" onclick="document.forms['reply_form']['id_content'].value += '[i][/i]'">i</button>
+        <button class="btn btn-outline-secondary" title="Texte souligné" onclick="document.forms['reply_form']['id_content'].value += '[u][/u]'">u</button>
+        <button class="btn btn-outline-secondary" title="Texte barré" onclick="document.forms['reply_form']['id_content'].value += '[s][/s]'">s</button>
+        <button class="btn btn-outline-secondary" title="Liste d'items" onclick="document.forms['reply_form']['id_content'].value += '[list][/list]'">list</button>
+        <button class="btn btn-outline-secondary" title="Item d'une liste" onclick="document.forms['reply_form']['id_content'].value += '[*]'">*</button>
+        <button class="btn btn-outline-secondary" title="Texte en code" onclick="document.forms['reply_form']['id_content'].value += '[code][/code]'">code</button>
+        <button class="btn btn-outline-secondary" title="Citation" onclick="document.forms['reply_form']['id_content'].value += '[quote][/quote]'">quote</button>
+        <button class="btn btn-outline-secondary" title="Centrer le texte" onclick="document.forms['reply_form']['id_content'].value += '[center][/center]'">center</button>
+        <button class="btn btn-outline-secondary" title="Changer la couleur. Remplacer # par une valeur hexadécimale ou un nom en anglais (green, red)" onclick="document.forms['reply_form']['id_content'].value += '[color=#][/color]'">color</button>
+        <button class="btn btn-outline-secondary" title="Insérer un hyperlien. Remplacer # par le lien (sans guillemets)" onclick="document.forms['reply_form']['id_content'].value += '[url=#][/url]'">url</button>
+        <button class="btn btn-outline-secondary" title="Insérer une image. Remplacer le dièse par le lien (sans guillemets)" onclick="document.forms['reply_form']['id_content'].value += '[img][/img]'">img</button>
+        <button class="btn btn-outline-secondary" title="Aide bbcode" ><a href="https://django-precise-bbcode.readthedocs.io/en/stable/basic_reference/builtin_bbcodes.html">Aide bbcode</a></button>
+    </div>
+
+    <br>
+    
+    <a href="/forum" class="btn btn-outline-secondary btn-block">Annuler</a>
+
+
+</div>
+
+{% endblock %}

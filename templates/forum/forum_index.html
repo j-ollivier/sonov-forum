@@ -1,0 +1,65 @@
+{% extends "forum/base.html" %}
+{% block content %}
+
+{% for category in categories %}
+<h1>{{category.name}}</h1>
+
+<div class="container-fluid col-md-8 w_bg">
+    <div class="row">
+        <div class="text-center col-md-1">
+            <!-- hurr -->
+        </div>
+        <div class="text-center col-md-5">
+            <h5>Sujet</h5>
+        </div>
+        <div class="text-center col-md-2">
+            <h5>Posts</h5>
+        </div>
+        <div class="text-center col-md-2">
+            <h5>Dernier post</h5>
+        </div>
+        <div class="text-center col-md-2">
+            <h5>Date de création</h5>
+        </div>
+    </div>
+    <hr>
+    {% for thread in threads %}
+    {% if thread.category == category %}
+    <div class="row">
+        <div class="text-center p-2 col-md-1">
+            {% if thread.has_unread_post %}
+            <img src="/static/forum/logo_1.png">
+            {% elif thread.is_closed %}
+            <img src="/static/forum/logo_1_red.png">
+            {% else %}
+            <img src="/static/forum/logo_1_bw.png">
+            {% endif %}
+        </div>
+        <div class="p-2 col-md-5">
+            <a href="/forum/thread/{{thread.uid}}"><h6 class="text-left">{{thread.name}}</h6></a>
+        </div>
+        <div class="text-center p-2 col-md-2">
+            {{thread.PostCount}}
+        </div>
+        <div class="text-center p-2 col-md-2">
+            {{thread.LastPost|date:'d-m-Y H:i'}}
+        </div>
+        <div class="text-center p-2 col-md-2">
+            {{thread.timestamp|date:'d-m-Y H:i'}}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% if request.user.is_authenticated %}
+
+<hr>
+
+<h4><a href="forum/newthread/{{category.uid}}"><button type="button" class="btn btn-secondary">Créer un nouveau fil de discussion</button></a></h4>
+
+{% endif %}
+
+{% endfor %}
+
+{% endblock %}

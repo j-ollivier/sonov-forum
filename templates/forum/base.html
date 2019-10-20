@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="ROBOTS" content="NONE" />
+        <link rel="favicon" href="/static/forum/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/static/forum/css/bootstrap.min.css">
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="/static/forum/css/custom.css">
+        <!-- Feather glyphicons -->
+        <link rel="stylesheet" href="/static/forum/css/feather.css">
+
+    </head>
+
+    <body>
+
+        {% include 'forum/banner.html' %}
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/forum/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/static/forum/js/popper.min.js"></script>
+    <script src="/static/forum/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/static/forum/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- feather js -->
+<!--     <script src="/static/forum/js/feather.js"></script>
+    <script>
+      feather.replace()
+    </script> -->
+</html>

@@ -1,0 +1,44 @@
+{% extends "forum/base.html" %}
+{% block content %}
+{% load bbcode_tags %}
+
+<h1>Votre profil forum</h1>
+
+<div class="container-fluid col-md-8 w_bg">
+    <div class="row">
+        <div class="container-fluid col-lg-2 order-md-1">
+            <img src="{{current_profile.avatar}}">
+            <h4>{{current_profile.name}}</h4>
+            <!-- <p class="font-italic">{{post.author.signature}}</p> -->
+        </div>
+        <div class="container-fluid col-lg-9 order-md-2">
+            <p class="pt-3">Ceci est l'apparence de vos posts !</p>
+        </div>
+    </div>
+    <div class="container-fluid col-md-12 order-md-2">
+        <span>
+            <p class="font-italic text-right">Posté le {{post.timestamp|date:'d-m-Y H:i'}} </p>
+            <a class="btn btn-outline-secondary btn-sm" type="button" href="/forum/forum/report/{{post.uid}}">Signaler le post</a>
+            {% if post.author == current_member %}
+            <a class="btn btn-outline-secondary btn-sm" type="button" href="/forum/editpost/{{post.uid}}">Editer le post</a>
+            {% endif %}
+            {% if request.user.is_superuser %}
+            <a  class="btn btn-outline-secondary btn-sm" type="button" href="/admin/forum/postforum/{{post.uid}}/change">Page admin du post</a>
+            {% endif %}
+        </span>
+    </div>
+    <hr>
+</div>
+
+<h1>Editer le profil</h1>
+
+<div class="container-fluid col-md-10 w_bg">
+    <p>Pour changer d'avatar, envoyez moi un mail (désolé) :)</p>
+    <br><br>
+    <form id="profile_form" action="/forum/profile" method="post">
+        {% csrf_token %}
+        {{ change_profile_form.as_p }}
+        <input id= "message_submit" type="submit" value="Confirmer" />
+    </form>
+</div>
+{% endblock %}
